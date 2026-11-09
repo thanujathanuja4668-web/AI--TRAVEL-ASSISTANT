@@ -2,13 +2,15 @@ import streamlit as st
 from google import genai
 from google.genai import errors
 import time
+import os
 
 
 def get_travel_response(user_message):
 
     try:
         client = genai.Client(
-            api_key=st.secrets["GEMINI_API_KEY"]
+            api_key=os.getenv("GEMINI_API_KEY") or
+            st.secrets["GEMINI_API_KEY"]
         )
 
         for attempt in range(3):
